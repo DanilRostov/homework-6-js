@@ -54,7 +54,7 @@ var HEROES_ACCESSIBLE_NAMES = [
 
 function Pers() {
 	this.hp = null; // Health power
-	this.ap - null; // Attack power
+	this.ap = null; // Attack power
 	this.currentHP = null;
 	this.skillCounter = 2;
 	this.name = null;
@@ -81,6 +81,7 @@ Pers.prototype.initPers = function(name, settings) {
 
 Pers.prototype.regen = function() {
 	this.currentHP = this.hp;
+	this.skillCounter = 2;
 }
 
 Pers.prototype.setName = function(name) {
@@ -108,7 +109,7 @@ Pers.prototype.getHP = function() {
 }
 
 Pers.prototype.shouldUseSkill = function(skillCounter) {
-  return (this.currentHP < this.hp/2 && skillCounter > 0); 
+  return (this.currentHP < this.hp/2 && skillCounter > 0);
 }
 
 // Heroes
@@ -131,11 +132,11 @@ Hero.prototype.constructor = Hero;
 
 Hero.prototype.setHP = function(ap) {
 	if(this.shouldUseSkill(this.skillCounter)) {
-		this.skillCounter -= 1;  
+		this.skillCounter -= 1;
 	} else {
 		this.currentHP -= ap;
-	} 
-}	
+	}
+}
 
 function Burg(name) {
 	Hero.apply(this, arguments);
@@ -172,8 +173,8 @@ function Monster() {
 				this.skillOpponentCounter -= 1;
 			} else {
 				this.currentHP -= ap;
-			} 
-		}	
+			}
+		}
 	}
 }
 
@@ -229,7 +230,7 @@ Tournament.prototype.registerParticipants = function(persList) {
 		if (this.participantsList.length > this.maxParticipants - 1) {
 			console.log('Max number of participants reached. Max number is ' + this.maxParticipants);
 			break;
-		} 
+		}
 	}
 }
 
@@ -289,9 +290,7 @@ Tournament.prototype.getStages = function(num) {
 }
 
 var tour1 = new Tournament(15);
-
 var MAGIC_DRINK = true;
-
 var PARTICIPANTS_LIST = [
 	new Gob('Mon7', MAGIC_DRINK),
 	new Burg('Hero6', MAGIC_DRINK),
@@ -315,11 +314,4 @@ var PARTICIPANTS_LIST = [
 ];
 
 tour1.registerParticipants(PARTICIPANTS_LIST);
-
 tour1.startTournament();
-
-
-
-
-
-
